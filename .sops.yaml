@@ -1,0 +1,6 @@
+keys:
+  - &veer age1np9ewz0qm8pfzamagfux6k0jwy0890qpw4m36k4xxsa46p5yxatqh6cm6c
+creation_rules:
+  - path_regex: secrets/.*
+    key_groups:
+      - age: [*veer]
