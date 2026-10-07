@@ -236,12 +236,6 @@
 
     hl.bind(mod .. " + C", hl.dsp.exec_cmd("hyprpicker -a"), { description = "Color picker" })
 
-    hl.bind(mod .. " + G", function()
-        if hl.plugin and hl.plugin.overview then
-            hl.plugin.overview.toggle()
-        end
-    end, { description = "Toggle workspace overview" })
-
     hl.bind(mod .. " + R", hl.dsp.submap("resize"), { description = "Resize mode" })
 
     hl.define_submap("resize", function()
