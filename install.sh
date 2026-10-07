@@ -34,27 +34,6 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-COPY_FILES=(
-    flake.nix
-    home.nix
-    hm-modules/hyprland.nix
-    hm-modules/services.nix
-    hm-modules/packages.nix
-    hm-modules/kitty.nix
-    hm-modules/scripts.nix
-    hm-modules/caelestia.nix
-    hm-modules/matugen.nix
-    hm-modules/fuzzel.nix
-    hm-modules/zsh.nix
-    hm-modules/qt6ct.nix
-    hm-modules/gtk.nix
-    hm-modules/default-apps.nix
-    hm-modules/git.nix
-    hm-modules/secrets.nix
-    sys-modules/base.nix
-    sys-modules/sddm.nix
-    sys-modules/purge.nix
-)
 DELETE_FILES=(
     hm-modules/waybar.nix
     hm-modules/wofi.nix
@@ -63,9 +42,6 @@ DELETE_FILES=(
 
 echo "==> Pre-flight checks"
 [ -d "$NIXOS_DIR" ] || { echo "ERROR: $NIXOS_DIR not found" >&2; exit 1; }
-for f in "${COPY_FILES[@]}"; do
-    [ -e "$REPO/$f" ] || { echo "ERROR: missing $REPO/$f" >&2; exit 1; }
-done
 command -v nix >/dev/null || { echo "ERROR: nix not found" >&2; exit 1; }
 [ -e "$REPO/vars.nix" ] || { echo "ERROR: vars.nix missing — run ./configure.sh first, or copy vars.example.nix to vars.nix and fill it in" >&2; exit 1; }
 
@@ -73,12 +49,13 @@ echo "==> Backing up $NIXOS_DIR -> $BACKUP_DIR"
 sudo cp -a "$NIXOS_DIR" "$BACKUP_DIR"
 echo "    (restore with: sudo cp -a $BACKUP_DIR/. $NIXOS_DIR/ )"
 
-echo "==> Copying rice files into $NIXOS_DIR"
-for f in "${COPY_FILES[@]}"; do
-    sudo cp -a "$REPO/$f" "$NIXOS_DIR/$f"
-done
-sudo rm -rf "$NIXOS_DIR/gtk-css"
-sudo cp -a "$REPO/gtk-css" "$NIXOS_DIR/gtk-css"
+echo "==> Copying rice tree into $NIXOS_DIR"
+sudo rm -rf "$NIXOS_DIR/gtk-css" "$NIXOS_DIR/icons"
+sudo rsync -a \
+  --exclude='.git' --exclude='result' --exclude='result-*' --exclude='.direnv' \
+  --exclude='configure.sh' --exclude='install.sh' --exclude='README.md' \
+  --exclude='LICENSE' --exclude='.editorconfig' --exclude='vars.example.nix' \
+  "$REPO"/ "$NIXOS_DIR"/
 
 echo "==> Removing replaced modules"
 for f in "${DELETE_FILES[@]}"; do
@@ -165,7 +142,7 @@ cat <<EOF
 Done. Next steps:
   1. Log out and back in (caelestia shell, plugin binds, SDDM cursor).
   2. Reboot once to see the new plymouth splash.
-  3. Read README-COPY.md for what changed (keybinds, removed apps).
+  3. Read README.md (Rice notes) for what changed (keybinds, removed apps).
 
 Backup:  $BACKUP_DIR
 Moved:   $TRASH_DIR
