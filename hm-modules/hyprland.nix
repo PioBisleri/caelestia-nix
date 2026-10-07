@@ -279,7 +279,6 @@
 
   xdg.configFile."hypr/plugins.lua".text = ''
     hl.on("hyprland.start", function()
-      hl.exec_cmd("bash -c 'sleep 2 && hyprctl plugin load ${pkgs.hyprlandPlugins.hyprspace}/lib/libhyprspace.so'")
       hl.exec_cmd("bash -c 'sleep 2 && hyprctl plugin load ${pkgs.hyprlandPlugins.hypr-dynamic-cursors}/lib/libhypr-dynamic-cursors.so'")
       hl.exec_cmd("bash -c 'sleep 2 && hyprctl plugin load ${pkgs.hyprlandPlugins.borders-plus-plus}/lib/libborders-plus-plus.so'")
     end)

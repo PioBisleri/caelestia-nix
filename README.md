@@ -67,10 +67,10 @@ launcher.
 - waybar → Caelestia bar, swaync → Caelestia notifications, wofi → Caelestia launcher
 - `hyprland.conf` replaced by Lua (`hyprland.lua` + `hypr/conf/*.lua`)
 - Matugen generates: hyprland colors, kitty theme, fuzzel colors, btop theme,
-  zathura, starship, hyprlock, qt6ct. Re-theme with `SUPER W` (wallpaper) or
+  zathura, starship, qt6ct. Re-theme with `SUPER W` (wallpaper) or
   `SUPER SHIFT T` (scheme/flavour/dark-light). State cached in
   `~/.cache/matugen-state`; first-boot bootstrap fills missing outputs.
-- Hyprland plugins: hyprspace (`SUPER G` overview), hypr-dynamic-cursors,
+- Hyprland plugins: hypr-dynamic-cursors,
   borders-plus-plus.
 
 ## License
