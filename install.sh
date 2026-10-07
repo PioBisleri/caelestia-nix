@@ -67,6 +67,7 @@ for f in "${COPY_FILES[@]}"; do
     [ -e "$REPO/$f" ] || { echo "ERROR: missing $REPO/$f" >&2; exit 1; }
 done
 command -v nix >/dev/null || { echo "ERROR: nix not found" >&2; exit 1; }
+[ -e "$REPO/vars.nix" ] || { echo "ERROR: vars.nix missing — run ./configure.sh first, or copy vars.example.nix to vars.nix and fill it in" >&2; exit 1; }
 
 echo "==> Backing up $NIXOS_DIR -> $BACKUP_DIR"
 sudo cp -a "$NIXOS_DIR" "$BACKUP_DIR"

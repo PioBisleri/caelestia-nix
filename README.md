@@ -1,5 +1,11 @@
 # nixos-caelestia
 
+[![NixOS](https://img.shields.io/badge/NixOS-26.05-blue?logo=nixos)](https://nixos.org/)
+[![Hyprland](https://img.shields.io/badge/Hyprland-Lua-blueviolet)](https://hyprland.org/)
+[![Caelestia](https://img.shields.io/badge/Shell-Caelestia-blue)](https://github.com/caelestia-dots/shell)
+[![Home Manager](https://img.shields.io/badge/Home%20Manager-declarative-green)](https://github.com/nix-community/home-manager)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-green.svg)](LICENSE)
+
 My NixOS configuration — Hyprland + Caelestia shell, fully declarative, with dynamic
 matugen theming and sops-nix secrets.
 
@@ -24,13 +30,16 @@ matugen theming and sops-nix secrets.
 | `gtk-css/` | GTK3/GTK4 custom CSS |
 | `secrets/` | sops-nix age-encrypted secrets |
 | `install.sh` | Bootstrap: copies config into `/etc/nixos` and runs the rebuild |
-| `README-COPY.md` | Notes on what changed during the rice session |
+| `configure.sh` | Interactive setup — writes your local `vars.nix` |
+| `vars.example.nix` | Template for the gitignored, local `vars.nix` |
+| `README.md` | This file |
 
 ## Apply
 
 ```bash
 cd nixos-caelestia
-sudo ./install.sh        # copies to /etc/nixos, dry-run build, backs up /boot, switch
+./configure.sh          # or: cp vars.example.nix vars.nix and edit it
+sudo ./install.sh       # copies to /etc/nixos, dry-run build, backs up /boot, switch
 ```
 
 or manually:
@@ -52,6 +61,17 @@ sops secrets/system.yaml
 SUPER is the main modifier. Press `SUPER + K` for the full keybind menu (with
 descriptions), `SUPER + W` for the wallpaper picker, `SUPER + Space` for the
 launcher.
+
+## Rice notes
+
+- waybar → Caelestia bar, swaync → Caelestia notifications, wofi → Caelestia launcher
+- `hyprland.conf` replaced by Lua (`hyprland.lua` + `hypr/conf/*.lua`)
+- Matugen generates: hyprland colors, kitty theme, fuzzel colors, btop theme,
+  zathura, starship, hyprlock, qt6ct. Re-theme with `SUPER W` (wallpaper) or
+  `SUPER SHIFT T` (scheme/flavour/dark-light). State cached in
+  `~/.cache/matugen-state`; first-boot bootstrap fills missing outputs.
+- Hyprland plugins: hyprspace (`SUPER G` overview), hypr-dynamic-cursors,
+  borders-plus-plus.
 
 ## License
 
