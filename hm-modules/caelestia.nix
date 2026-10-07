@@ -17,6 +17,7 @@
         substituteInPlace components/filedialog/FolderContents.qml \
           --replace-fail 'Quickshell.iconPath(`folder-''${file.name.toLowerCase()}`)' \
                           'Quickshell.iconPath(`folder-''${file.name.toLowerCase()}`, "folder")'
+        printf '%s\n' '#%PAM-1.0' 'auth required pam_unix.so nullok' > assets/pam.d/passwd
       '';
     });
 
@@ -32,7 +33,7 @@
         apps.terminal = [ "kitty" ];
         idle.timeouts = [ ];
       };
-      lock.enabled = false;
+      lock.enabled = true;
       bar.workspaces.shown = 9;
       background.wallpaperEnabled = true;
       services = {

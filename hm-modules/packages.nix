@@ -31,7 +31,6 @@
     gnumake                # Build automation tool
     grim                   # Wayland screenshot capture
     hypridle               # Hyprland idle management daemon
-    hyprlock               # Hyprland-native screen locker
     hyprpicker             # Color picker for Hyprland
     hyprshot               # Screenshot tool for Hyprland
     imagemagick            # Image conversion/manipulation

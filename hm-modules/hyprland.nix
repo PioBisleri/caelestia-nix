@@ -180,7 +180,7 @@
 
     hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd("bash -c 'pidof wf-recorder && pkill wf-recorder || wf-recorder -f ~/Pictures/Screenshots/rec_$(date +%Y%m%d_%H%M%S).mp4'"), { description = "Toggle screen recording" })
 
-    hl.bind(mod .. " + L", hl.dsp.exec_cmd("hyprlock"), { description = "Lock screen" })
+    hl.bind(mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"), { description = "Lock screen" })
 
     hl.bind(mod .. " + Escape", hl.dsp.global("caelestia:session"), { description = "Session menu" })
 
