@@ -111,10 +111,6 @@ fi
 echo "==> Dry build (catches evaluation/build errors, activates nothing)"
 sudo nixos-rebuild dry-build --flake "$NIXOS_DIR#nixos"
 
-echo "==> Backing up bootloader config from /boot"
-sudo cp -r /boot/grub "/boot/grub.bak-$TS" || echo "    (warning: /boot/grub not found)"
-sudo cp -r /boot/EFI "/boot/EFI.bak-$TS" || echo "    (warning: /boot/EFI not found)"
-
 if [ "$DO_SWITCH" -eq 1 ]; then
     echo "==> Testing (switches into new config WITHOUT touching /boot)"
     sudo nixos-rebuild test --flake "$NIXOS_DIR#nixos"
@@ -146,7 +142,4 @@ Done. Next steps:
 
 Backup:  $BACKUP_DIR
 Moved:   $TRASH_DIR
-Bootloader backup:  /boot/grub.bak-$TS and /boot/EFI.bak-$TS
-(if a future boot breaks: copy /boot/grub.bak-$TS back and re-run
- 'bootctl install / grub-install ...' from a rescue login)
 EOF
