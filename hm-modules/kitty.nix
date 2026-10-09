@@ -12,6 +12,7 @@
     window_padding_width 12
     hide_window_decorations yes
     confirm_os_window_close 0
+    remember_window_size no
 
     # Catppuccin Mocha colors
     foreground #cdd6f4
