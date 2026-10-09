@@ -7,6 +7,8 @@ let
 
 in {
 
+  services.displayManager.defaultSession = "hyprland";
+
   services.displayManager.sddm = {
     autoNumlock = true;
     enableHidpi = true;
