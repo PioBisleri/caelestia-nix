@@ -62,6 +62,25 @@ SUPER is the main modifier. Press `SUPER + K` for the full keybind menu (with
 descriptions), `SUPER + W` for the wallpaper picker, `SUPER + Space` for the
 launcher.
 
+## purge
+
+`purge` (in `sys-modules/purge.nix`) is a Catppuccin-themed Rust TUI for RAM and
+storage cleanup — no extra Cargo deps, embedded as Nix string derivations.
+
+- **Storage** — hybrid cleaner: auto-discovered `~/.cache/*` targets plus curated
+  system ones (`/boot` stale files, `/etc` backups >3d, …); scan with `s`, pick
+  with space, clean with `c` (asks y/n).
+- **Memory** — RAM/swap/reclaimable gauges, RAM sparkline, `d` drop caches,
+  `w` clear swap (sudo).
+- **Processes** — top processes by RAM/CPU (`t` toggles), `x`/`X` TERM/KILL.
+- **Limiter** — hard caps via user cgroups: `c` CPU% / `m` memory MB on the
+  selected process, `x` restores, `s` saves a rule for that command (persisted
+  in `~/.config/purge/limits.conf`). `A` re-applies rules now.
+- **Logs** — activity log, `?` shows per-tab help.
+
+Saved rules are re-applied at login by the `purge-limits` user service
+(`sys-modules/purge-limits.nix`); headless equivalent: `purge --apply-limits`.
+
 ## Rice notes
 
 - waybar → Caelestia bar, swaync → Caelestia notifications, wofi → Caelestia launcher

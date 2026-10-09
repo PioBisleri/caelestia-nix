@@ -12,6 +12,7 @@
     ./sys-modules/gaming.nix
     ./sys-modules/secrets.nix
     ./sys-modules/thunar.nix
+    ./sys-modules/purge-limits.nix
   ];
 
 }
